@@ -5,16 +5,6 @@ kills and displays the running total as a compact badge overlaid on the
 bottom-right corner of the vanilla **View Kills** icon in the character
 window (the icon in the vertical strip to the left of the portrait).
 
-## What this branch does (`display-number`)
-
-![mock](docs/screenshot.png)
-
-Rather than adding a new widget under the portrait (that is what the
-`main` branch does), this branch re-uses the existing **View Kills**
-button that CK3 already shows for any character with attributed named
-kills, and puts the running total directly on it. You now see the count
-at a glance without having to open the kill list and count the rows by
-hand.
 
 ## What is counted
 
@@ -150,16 +140,6 @@ With the mod enabled and `-debug_mode` in the CK3 launch options:
    `Documents\Paradox Interactive\Crusader Kings III\logs\error.log`
    for any entries referencing `kc_knight_killcount_*` or
    `window_character.gui` - there should be none from this mod.
-
-## Difference from `main`
-
-- `main` ships a new widget under the portrait (next to the vassal-
-  stance icon). Nothing is overlaid on existing UI.
-- `display-number` (this branch) does not add a portrait widget. It
-  overlays the count on the existing **View Kills** button instead.
-
-Both branches use the exact same on_death / scripted-effect pipeline,
-so the number shown is the same - only the rendering differs.
 
 ## Compatibility
 
