@@ -4,4 +4,4 @@ tags={
 	"Warfare"
 }
 name="Knight Kill Count"
-supported_version="1.17.*"
+supported_version="1.18.*"
