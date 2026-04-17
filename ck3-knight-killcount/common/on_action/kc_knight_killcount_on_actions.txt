@@ -1,11 +1,26 @@
 ﻿# Knight Kill Count - on_action hooks
 #
-# Appends to vanilla on_death (defined in
-# game/common/on_action/death.txt). Root is the dying character; the engine
-# sets scope:killer only when a specific named character did the killing
-# (knight-vs-knight combat phase, commander kills, duels, successful murder
-# schemes, etc.). We credit the killer's lifetime kill count in that case.
+# We want to append to vanilla on_death (defined in
+# game/common/on_action/death.txt). That on_action already has its own
+# `effect = { ... }` block, and declaring a second one here triggers the
+# "There is more than one 'effect' defined using most recent" warning in
+# error.log (the engine silently keeps only the last one).
+#
+# The CK3-idiomatic way to append extra behaviour is to add a nested
+# scripted on_action via `on_actions = { ... }`, which is how vanilla
+# on_birthday chains on_birthday_childhood etc. (see
+# game/common/on_action/birthday.txt).
 on_death = {
+	on_actions = {
+		kc_knight_killcount_on_death
+	}
+}
+
+# Scope = the dying character. The engine sets scope:killer only when a
+# specific named character did the killing (knight-vs-knight combat phase,
+# commander kills, duels, successful murder schemes, executions, etc.).
+# We credit the killer's lifetime kill count in that case.
+kc_knight_killcount_on_death = {
 	effect = {
 		if = {
 			limit = { exists = scope:killer }

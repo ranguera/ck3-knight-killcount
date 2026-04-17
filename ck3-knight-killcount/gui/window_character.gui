@@ -813,29 +813,36 @@ window = {
 					### on_death on_action hook in common/on_action/kc_knight_killcount_on_actions.txt.
 					### Hidden when the variable is unset (character has not killed anyone since
 					### the mod was installed) so vanilla characters don't show a stray "0".
-					text_single = {
+					### onclick mirrors the parent button_kill_list so the whole icon - including
+					### the pixels covered by the badge - opens the kill list window.
+					button = {
 						name = "kc_kill_count_badge"
 						parentanchor = bottom|right
 						widgetanchor = bottom|right
 						position = { -2 -2 }
 						visible = "[GreaterThan_CFixedPoint( Character.MakeScope.Var('kc_kill_count').GetValue, '(CFixedPoint)0' )]"
-
-						text = "[Character.MakeScope.Var('kc_kill_count').GetValue|V0]"
-						default_format = "#high"
-						align = right
-						min_width = 16
-						margin = { 3 0 }
+						onclick = "[ToggleGameViewData( 'kill_list', Character.GetID )]"
 
 						tooltip = "KC_KILL_COUNT_BADGE_TOOLTIP"
 						using = tooltip_es
 
-						background = {
-							name = "kc_kill_count_badge_bg"
-							texture = "gfx/interface/component_tiles/solid_black_label.dds"
-							spritetype = Corneredtiled
-							spriteborder = { 8 8 }
-							texture_density = 2
-							alpha = 0.85
+						text_single = {
+							name = "kc_kill_count_badge_text"
+							parentanchor = center
+							text = "[Character.MakeScope.Var('kc_kill_count').GetValue|V0]"
+							default_format = "#high"
+							align = nobaseline|center
+							min_width = 16
+							margin = { 3 0 }
+
+							background = {
+								name = "kc_kill_count_badge_bg"
+								texture = "gfx/interface/component_tiles/solid_black_label.dds"
+								spritetype = Corneredtiled
+								spriteborder = { 8 8 }
+								texture_density = 2
+								alpha = 0.85
+							}
 						}
 					}
 				}
