@@ -1,0 +1,2 @@
+﻿l_english:
+ KC_KILL_COUNT_TOOLTIP:0 "Lifetime named characters killed: #V [Character.MakeScope.Var('kc_kill_count').GetValue|V0]#!\nKnights, commanders, and other named characters this person is credited with killing (in combat, duels, or successful murder schemes).\n\n#weak Note: anonymous levies/men-at-arms casualties shown in the battle summary's Knights tab are not accessible to script, so they are not counted here.#!"

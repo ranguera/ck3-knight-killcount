@@ -1,0 +1,17 @@
+# Knight Kill Count - on_action hooks
+#
+# Appends to vanilla on_death (defined in
+# game/common/on_action/death.txt). Root is the dying character; the engine
+# sets scope:killer only when a specific named character did the killing
+# (knight-vs-knight combat phase, commander kills, duels, successful murder
+# schemes, etc.). We credit the killer's lifetime kill count in that case.
+on_death = {
+	effect = {
+		if = {
+			limit = { exists = scope:killer }
+			scope:killer = {
+				kc_increment_kill_count_effect = yes
+			}
+		}
+	}
+}
