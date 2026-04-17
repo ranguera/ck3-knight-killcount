@@ -111,31 +111,9 @@ window = {
 
 				blockoverride "portrait_opinion"
 				{
-					hbox = {
-						spacing = 5
-
-						vassal_stance_icon = {
-							name = "vassal_stance"
-							size = { 20 20 }
-						}
-
-						# Knight Kill Count mod: lifetime named-character kills
-						hbox = {
-							name = "kc_kill_count_display"
-							visible = "[GreaterThan_CFixedPoint( Character.MakeScope.Var( 'kc_kill_count' ).GetValue, '(CFixedPoint)0' )]"
-							spacing = 3
-
-							icon = {
-								size = { 20 20 }
-								texture = "gfx/interface/icons/icon_kill.dds"
-								tooltip = "KC_KILL_COUNT_TOOLTIP"
-							}
-							text_single = {
-								text = "[Character.MakeScope.Var( 'kc_kill_count' ).GetValue|V0]"
-								default_format = "#high"
-								tooltip = "KC_KILL_COUNT_TOOLTIP"
-							}
-						}
+					vassal_stance_icon = {
+						name = "vassal_stance"
+						size = { 20 20 }
 					}
 				}
 			}
@@ -827,6 +805,44 @@ window = {
 						modify_texture = {
 							texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
 							blend_mode = alphamultiply
+						}
+					}
+
+					### Knight Kill Count mod - kill count badge, bottom|right of the kill-list icon.
+					### Reads the kc_kill_count character variable, which is maintained by the
+					### on_death on_action hook in common/on_action/kc_knight_killcount_on_actions.txt.
+					### Hidden when the variable is unset (character has not killed anyone since
+					### the mod was installed) so vanilla characters don't show a stray "0".
+					### onclick mirrors the parent button_kill_list so the whole icon - including
+					### the pixels covered by the badge - opens the kill list window.
+					button = {
+						name = "kc_kill_count_badge"
+						parentanchor = bottom|right
+						widgetanchor = bottom|right
+						position = { -2 -2 }
+						visible = "[GreaterThan_CFixedPoint( Character.MakeScope.Var('kc_kill_count').GetValue, '(CFixedPoint)0' )]"
+						onclick = "[ToggleGameViewData( 'kill_list', Character.GetID )]"
+
+						tooltip = "KC_KILL_COUNT_BADGE_TOOLTIP"
+						using = tooltip_es
+
+						text_single = {
+							name = "kc_kill_count_badge_text"
+							parentanchor = center
+							text = "[Character.MakeScope.Var('kc_kill_count').GetValue|V0]"
+							default_format = "#high"
+							align = nobaseline|center
+							min_width = 16
+							margin = { 3 0 }
+
+							background = {
+								name = "kc_kill_count_badge_bg"
+								texture = "gfx/interface/component_tiles/solid_black_label.dds"
+								spritetype = Corneredtiled
+								spriteborder = { 8 8 }
+								texture_density = 2
+								alpha = 0.85
+							}
 						}
 					}
 				}
