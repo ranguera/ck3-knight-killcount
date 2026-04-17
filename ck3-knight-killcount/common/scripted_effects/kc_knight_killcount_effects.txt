@@ -1,4 +1,4 @@
-# Knight Kill Count - scripted effects
+﻿# Knight Kill Count - scripted effects
 #
 # kc_increment_kill_count_effect: run in the scope of the killer. Initialises
 # the kc_kill_count variable if needed (change_variable on a character that

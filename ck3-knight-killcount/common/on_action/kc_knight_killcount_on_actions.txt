@@ -1,4 +1,4 @@
-# Knight Kill Count - on_action hooks
+﻿# Knight Kill Count - on_action hooks
 #
 # Appends to vanilla on_death (defined in
 # game/common/on_action/death.txt). Root is the dying character; the engine
